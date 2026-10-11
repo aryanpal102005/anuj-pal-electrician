@@ -2,7 +2,9 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5001/api',
+ baseURL:
+  process.env.REACT_APP_API_URL ||
+  'https://electrician-shop-backend.onrender.com/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -49,7 +51,7 @@ API.interceptors.response.use(
     
     // Handle network errors
     if (!error.response) {
-      error.message = 'Network error. Please check if backend is running on http://localhost:5001';
+      error.message ='Network error. Please check your internet connection and the deployed backend.';
     }
     
     return Promise.reject(error);
