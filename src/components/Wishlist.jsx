@@ -1,0 +1,8 @@
+import React from 'react';
+const money = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
+const fallback = 'https://placehold.co/200x160/eaf3ff/123b70?text=Product';
+function Wishlist({ items, onRemove, onAddToCart, onBuyNow, onShop }) {
+  if (!items.length) return <section className="page-width empty-cart"><span>♡</span><h1>Your wishlist is empty</h1><p>Save products you would like to buy later.</p><button className="button button-primary" onClick={onShop}>Browse products</button></section>;
+  return <section className="page-width wishlist-page"><div className="cart-heading"><div><p className="eyebrow">Saved products</p><h1>My wishlist</h1></div><button className="link-button" onClick={onShop}>Continue shopping →</button></div><div className="wishlist-grid">{items.map((item) => <article key={item._id || item.id}><img src={item.images?.[0] || item.image || fallback} alt={item.name} onError={(event) => { event.currentTarget.src = fallback; }} /><div><p className="card-category">{item.brand}</p><h2>{item.name}</h2><b>{money(item.price)}</b><span className={item.stock > 0 ? 'stock in-stock' : 'stock out-stock'}>{item.stock > 0 ? 'In stock' : 'Out of stock'}</span><div className="wishlist-actions"><button className="card-add" disabled={item.stock === 0} onClick={() => onAddToCart(item, 1)}>Add to cart</button><button className="card-buy" disabled={item.stock === 0} onClick={() => onBuyNow(item, 1)}>Buy now</button></div><button className="remove-wishlist" onClick={() => onRemove(item._id || item.id)}>Remove from wishlist</button></div></article>)}</div></section>;
+}
+export default Wishlist;
