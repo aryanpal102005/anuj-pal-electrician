@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+const API_URL =
+  process.env.REACT_APP_API_URL ||
+  'https://electrician-shop-backend.onrender.com/api';
 const categories = [['all','All products'],['wiring-cable','Wires & cables'],['lighting','Lights'],['switches-boards','Switches'],['fans-cooling','Fans'],['heating','Heating'],['motors-pumps','Motors & pumps'],['protection','MCB & safety'],['tools-equipment','Tools'],['smart-devices','Smart devices'],['batteries-power','Batteries & power'],['house-fitting','Fittings'],['tv-internet','TV & internet'],['miscellaneous','Accessories']];
 const fallback = 'https://placehold.co/640x480/eaf3ff/123b70?text=Electrical+Shop';
 const money = (value) => new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(value);
